@@ -12,3 +12,16 @@ model = ChatOpenAI(
     model="deepseek-chat",
     temperature=0.7
 )
+
+chat_history =[]
+
+while True:
+    user_input = input('you: ')
+    chat_history.append({'role':'user','message':user_input})
+    if user_input == 'exit':
+        break
+    result = model.invoke(chat_history)
+    chat_history.append(result.content)
+    print("AI: ", chat_history)    
+
+print("Fine: ", result.content)    
