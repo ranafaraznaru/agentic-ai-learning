@@ -20,6 +20,8 @@ Why use TypedDict?
 -> Literal
 -> More complex -> with pros and cons
 
-(2) Pydantic
+(2) Pydantic (Preferred)
+Pydantic is a data validation and data parsing library for Python. It ensures that the data you work with is correct, structured, and type-safe.
+
 (3) Json schema
 """
