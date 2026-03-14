@@ -14,3 +14,9 @@ There are other output parsers are also available with langchain but we will use
 ## StrOutputParser
 
 The StrOutputParser is the simplest output parser in LangChain. It is used to parse the output of a Language Model (LLM) and return it as a plain string.
+
+## Structured output parsers
+
+StructuredOutputParser is an output parser in LangChain that helps extract structured JSON data from LLM responses based on predefined field schemas.
+
+It works by defining a list of fields (ResponseSchema) that the model should return, ensuring the output follows a structured format.
