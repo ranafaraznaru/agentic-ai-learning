@@ -50,3 +50,56 @@ Document(page_content="Text from page 1", metadata={"page": 0, "source": "file.p
 Document(page_content="Text from page 2", metadata={"page": 1, "source": "file.pdf"}),
 ...
 ]
+
+PyPDFLoader work really good with mostly text based pdf. It dont work perfectly with scanned images pdf.
+
+# PDF Loader Selection Guide
+
+| Use Case                       | Recommended Loader                               |
+| ------------------------------ | ------------------------------------------------ |
+| Simple, clean PDFs             | PyPDFLoader                                      |
+| PDFs with tables/columns       | PDFPlumberLoader                                 |
+| Scanned / image-based PDFs     | UnstructuredPDFLoader or AmazonTextractPDFLoader |
+| Need layout and image data     | PyMuPDFLoader                                    |
+| Want best structure extraction | UnstructuredPDFLoader                            |
+
+# DirectoryLoader Guide
+
+**DirectoryLoader** is a document loader that allows you to load multiple documents from a directory (folder) of files.
+
+## Glob Patterns
+
+| Pattern        | What It Loads                            |
+| -------------- | ---------------------------------------- |
+| `"**/*.txt"`   | All `.txt` files in all subfolders       |
+| `"*.pdf"`      | All `.pdf` files in the root directory   |
+| `"data/*.csv"` | All `.csv` files in the `data/` folder   |
+| `"**/*"`       | All files (any type, across all folders) |
+
+# Load vs Lazy Load
+
+## load()
+
+**Eager Loading** (loads everything at once)
+
+- **Returns:** A list of `Document` objects
+- Loads all documents immediately into memory
+
+### Best when:
+
+- The number of documents is small
+- You want everything loaded upfront
+
+---
+
+## lazy_load()
+
+**Lazy Loading** (loads on demand)
+
+- **Returns:** A generator of `Document` objects
+- Documents are not loaded all at once; they are fetched one at a time as needed
+
+### Best when:
+
+- You're dealing with large documents or many files
+- You want to stream processing (e.g., chunking, embedding) without using a lot of memory
