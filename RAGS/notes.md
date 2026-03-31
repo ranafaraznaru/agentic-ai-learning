@@ -21,7 +21,7 @@ There are four kind of document loaders
 (3) WebBasedLoader
 (4) CSVLoader
 
-Document Loaders
+(1) Document Loaders
 Definition: Components in LangChain used to load data from various sources into a standardized format (usually as Document objects).
 
 Purpose: Once loaded, these objects can be used for chunking, embedding, retrieval, and generation.
@@ -33,14 +33,14 @@ page_content="The actual text content",
 metadata={"source": "filename.pdf", ...}
 )
 
-TextLoader
+(1:1)TextLoader
 Definition: A simple and commonly used document loader in LangChain that reads plain text (.txt) files and converts them into LangChain Document objects.
 
 Use Case: Ideal for loading chat logs, scraped text, transcripts, code snippets, or any plain text data into a LangChain pipeline.
 
 Limitation: Works only with .txt files.
 
-PyPDFLoader
+(1:2)PyPDFLoader
 PyPDFLoader is a document loader in LangChain used to load content from PDF files and convert each page into a Document object.
 
 Example Output:
@@ -63,7 +63,7 @@ PyPDFLoader work really good with mostly text based pdf. It dont work perfectly 
 | Need layout and image data     | PyMuPDFLoader                                    |
 | Want best structure extraction | UnstructuredPDFLoader                            |
 
-# DirectoryLoader Guide
+(1:3)# DirectoryLoader Guide
 
 **DirectoryLoader** is a document loader that allows you to load multiple documents from a directory (folder) of files.
 
@@ -104,5 +104,42 @@ PyPDFLoader work really good with mostly text based pdf. It dont work perfectly 
 - You're dealing with large documents or many files
 - You want to stream processing (e.g., chunking, embedding) without using a lot of memory
 
-CSVLoader
+(1:4)CSVLoader
 CSVLoader is a document loader used to load CSV files into LangChain Document objects — one per row, by default.
+
+(2) Text Splitting
+Text Splitting is the process of breaking large chunks of text (like articles, PDFs, HTML pages, or books) into smaller, manageable pieces (chunks) that an LLM can handle effectively.
+
+# Why Text Splitting Matters
+
+## Overcoming Model Limitations
+
+Many embedding models and language models have maximum input size constraints.  
+Splitting allows us to process documents that would otherwise exceed these limits.
+
+---
+
+## Downstream Tasks
+
+Text splitting improves nearly every LLM-powered task:
+
+| Task            | Why Splitting Helps                             |
+| --------------- | ----------------------------------------------- |
+| Embedding       | Short chunks yield more accurate vectors        |
+| Semantic Search | Results point to focused information, not noise |
+| Summarization   | Prevents hallucination and topic drift          |
+
+---
+
+## Optimizing Computational Resources
+
+Working with smaller chunks of text:
+
+- Improves memory efficiency
+- Enables better parallel processing
+
+There are four types of Text Splitters
+(1) Length Based
+(2) Text Strcuture Based
+(3) Document Structure Based
+(4) Semantic Meaning Based
