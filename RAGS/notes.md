@@ -140,6 +140,6 @@ Working with smaller chunks of text:
 
 There are four types of Text Splitters
 (1) Length Based
-(2) Text Strcuture Based
+(2) Text Strcuture Based (Recursive , preferred)
 (3) Document Structure Based
 (4) Semantic Meaning Based
