@@ -103,3 +103,6 @@ PyPDFLoader work really good with mostly text based pdf. It dont work perfectly 
 
 - You're dealing with large documents or many files
 - You want to stream processing (e.g., chunking, embedding) without using a lot of memory
+
+CSVLoader
+CSVLoader is a document loader used to load CSV files into LangChain Document objects — one per row, by default.
