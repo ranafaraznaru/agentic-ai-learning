@@ -94,3 +94,47 @@ GoogleDriveCreateFileTool: Upload a file
 GoogleDriveSearchTool: Search for a file by name/content
 
 GoogleDriveReadFileTool: Read contents of a file
+
+### Tool Binding
+
+Tool Binding: The step where you register tools with a Language Model (LLM) so that the LLM knows what tools are available, what each tool does (via description), and what input format to use (via schema).
+
+# Tool Calling
+
+Tool Calling is the process where the LLM (language model) decides, during a conversation or task, that it needs to use a specific tool (function) — and generates a structured output with:
+
+- The name of the tool
+- The arguments to call it with
+
+🚨 **Important:** The LLM does not actually run the tool — it only suggests the tool and the input arguments. The actual execution is handled by LangChain or you.
+
+---
+
+## Example
+
+**User Query:**  
+"What's 8 multiplied by 7?"
+
+**LLM Response (Tool Call):**
+
+```json
+{
+  "tool": "multiply",
+  "args": {
+    "a": 8,
+    "b": 7
+  }
+}
+```
+
+# Tool Execution
+
+Tool Execution is the step where the actual Python function (tool) is run using the input arguments that the LLM suggested during tool calling.
+
+In simpler words:
+
+🧠 The LLM says:  
+"Hey, call the `multiply` tool with a=8 and b=7."
+
+⚙️ Tool Execution is when you or LangChain actually run:  
+`multiply(a=8, b=7)` → and get the result: **56**
