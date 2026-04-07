@@ -20,7 +20,7 @@ SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
 
 # STEP 1
 # Docuement loader
-video_id = "fjd2hm6-qtMh" # only the ID, not full URL
+video_id = "qAF1NjEVHhY" # only the ID, not full URL
 
 params = {
     "api_key":  SERPAPI_API_KEY,
@@ -42,14 +42,14 @@ try:
     # Flatten it to plain text
     # transcript = " ".join(chunk["text"] for chunk in transcript_list)
     transcript = " ".join(item["snippet"] for item in transcript_list)
-    # print(transcript,'transcript')
+    print(transcript,'transcript')
 
 except TranscriptsDisabled:
     print("No captions available for this video.")
 
 # Indexing 
 # Text Splitting 
-splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 chunks = splitter.create_documents([transcript])
 print(len(chunks))
 # print(chunks[1].page_content)
@@ -57,7 +57,8 @@ print(len(chunks))
 # Embedding Generation and Storing in Vector Store
 
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-001"
+    # model="gemini-embedding-001"
+     model = "gemini-embedding-2-preview"
 )
 
 vector_store = FAISS.from_documents(chunks, embeddings)
@@ -90,7 +91,7 @@ prompt = PromptTemplate(
     input_variables=["context", "question"]
 )
 
-question = "what is open router?"
+question = "What is difference between langchain and langgraph?"
 retrieved_docs = retriever.invoke(question)
 def format_docs(retrieved_docs):
     context_text = "\n\n".join(doc.page_content for doc in retrieved_docs)
