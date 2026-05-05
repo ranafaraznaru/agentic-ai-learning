@@ -265,3 +265,85 @@ Approval Requests (HITL): Agent checks with human before high-risk actions (e.g.
 Guardrails Enforcement: Blocks unsafe or non-compliant behavior.
 
 Edge Case Escalation: Alerts humans when uncertainty/conflict arises.
+
+### Challenges in using langchain
+
+## Control Flow Complexity
+
+Conditional branch
+
+Loops
+
+Jumps
+
+## Handling State
+
+States are basically in form of key and value pairs and langchain dont offer anything to store and track these key value pairs.
+it have memory which it store during conversation but it cant handle state so we have to do this manually.
+In langgraph during creation of gaph we create a state object, which can be made with pydantic and typeddic. Every node have access
+to this dictionary. Every node have access to the state and its changes.
+
+## Event Driven Execution (External interaction)
+
+We have two kind of workflows
+(1) Sequential
+(2) Event Driven
+Langchain basically designed for sequential chains, to handle even driven execution we need to write alot of glue code.
+Langgraph have this even driven ability and it can resume the workflow where it was stopped. We can save state into memory or external memory. To save our state we can use checkpointer.
+
+## Fault Tolerance (System can work again if it was shutdown due to a fault)
+
+Langchain doesnt have fault tolerance feature, langchain meant to built for short running tasks. Meanwhile langgraph can handle
+long running workflows and their is higher probability of occurance of a fault. Langgchain can resume the workflow where it was before
+crash using retry logic.
+For big fault langgraph have recovery option.
+
+## Human in the loop
+
+In short term workflow we can ask human for permission and workflow can wait but in long workflows it will keep eating resources if we use langchain. or we can make two chains and then ask for permission from human, once permission granted then we can start second chain but it will need alot of glue code need to be wrote
+
+## Nested Workflows
+
+## Observability
+
+refers to how easily you can monitor, debug, and understand what your workflow is doing at runtime.
+We can achieve this using langsmith with langchain but langsmith dont work with glue code.
+
+### Conclusion
+
+1. What is LangGraph?
+   LangGraph is an orchestration framework that enables you to build stateful, multi-step, and event-driven workflows using large language models (LLMs). It's ideal for designing both single-agent and multi-agent agentic AI applications.
+
+Think of LangGraph as a flowchart engine for LLMs — you define the steps (nodes), how they're connected (edges), and the logic that governs the transitions. LangGraph takes care of state management, conditional branching, looping, pausing/resuming, and fault recovery — features essential for building robust, production-grade AI systems.
+
+2. When to Use What?
+   Use LangChain when you're building simple, linear workflows — like a prompt chain, summarizer, or a basic retrieval system.
+
+Use LangGraph when your use case involves complex, non-linear workflows that need:
+
+Conditional paths
+
+Loops
+
+Human-in-the-loop steps
+
+Multi-agent coordination
+
+Asynchronous or event-driven execution
+
+3. Should We Still Use LangChain?
+   Yes. LangGraph is built on top of LangChain — it doesn’t replace it.
+
+You’ll still use LangChain components like:
+
+ChatOpenAI (LLMs)
+
+PromptTemplate
+
+Retrievers
+
+DocumentLoaders
+
+Tools, etc.
+
+LangGraph handles workflow orchestration, while LangChain provides the building blocks for each step in that workflow.
