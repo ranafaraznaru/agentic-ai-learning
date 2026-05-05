@@ -399,3 +399,20 @@ In Langgraph every node basically is a python function, and set of these functio
 
 There can be multiple kind of edges.
 sequential edges, parallel edges, conditional edges where we perform branching, loop. Langgraph provide all of this.
+
+### State
+
+In LangGraph, state is the shared memory that flows through your workflow- it holds all the data being passed between nodes as your graph runs.
+
+State is basically dicitionary which is called typed dicitionary. We make a oject inside a class and define all fields there. we can also make pydantic but mostly we use is typed dictionary.
+
+Example :
+
+essay_text: str
+topic: str
+depth_score: int
+language_score: int
+clarity_score: int
+total_score: int
+feedback: Annotated[list[str], add]
+evaluation_round: int
