@@ -392,3 +392,10 @@ There is orchestrator which decides on the basis of the query which LLM will per
 (4.5) Evaluator Optimizer
 
 In this workflow we have a LLM call generator which for example create a blog on specific topic then LLM call Evaluator which have specific criteria given by us which checks if the blog meet with our expectations if yes then it accept it and if it reject then it also provide feedback then LLM call generator generate another blog. Basically this entire process work in form of iteration and it keep going until unless it dont generate expected result.
+
+### Graphs, Nodes and Edges
+
+In Langgraph every node basically is a python function, and set of these functions are called graphs which are interconnected with the help of edges. Edge tells after executing of specific node which next node will execute. in short nodes tells what to do and edges tells when to execute the node.
+
+There can be multiple kind of edges.
+sequential edges, parallel edges, conditional edges where we perform branching, loop. Langgraph provide all of this.
