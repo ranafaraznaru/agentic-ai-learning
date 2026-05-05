@@ -416,3 +416,51 @@ clarity_score: int
 total_score: int
 feedback: Annotated[list[str], add]
 evaluation_round: int
+
+### Reducers
+
+Reducers in LangGraph define how updates from nodes are applied to the shared state.
+
+Each key in the state can have its own reducer, which determines whether new data replaces, merges, or adds to the existing value.
+
+### LangGraph Execution Model
+
+LangGraph execution model is inspired from google pregel which is basically a system can processing large scale graphs.
+
+Here is the text extracted from the image:
+
+1. Graph Definition
+   You define:
+
+The state schema (Typed dictionary)
+
+Nodes (functions that perform tasks)
+
+Edges (which node connects to which)
+
+2. Compilation
+   You call .compile() on the StateGraph.
+   This checks the graph structure and prepares it for execution.
+
+3. Invocation
+   You run the graph with .invoke(initial_state).
+   LangGraph sends the initial state as a message to the entry node(s).
+
+4. Super-Steps Begin
+   Execution proceeds in rounds.
+   In each round (super-step):
+
+All active nodes (those that received messages) run in parallel
+
+Each returns an update (message) to the state
+
+5. Message Passing & Node Activation
+   The messages are passed to downstream nodes via edges.
+   Nodes that receive messages become active for the next round.
+
+6. Halting Condition
+   Execution stops when:
+
+No nodes are active, and
+
+No messages are in transit
