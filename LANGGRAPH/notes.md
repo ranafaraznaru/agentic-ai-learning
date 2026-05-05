@@ -347,3 +347,48 @@ DocumentLoaders
 Tools, etc.
 
 LangGraph handles workflow orchestration, while LangChain provides the building blocks for each step in that workflow.
+
+### What is LangGraph
+
+LangGraph is an orchestration framework for building intelligent, stateful, and multi-step LLM workflows.
+
+It enables advanced features like parallelism, loops, branching, memory, and resumability — making it ideal for agentic and production-grade AI applications.
+
+It models your logic as a graph of nodes (tasks) and edges (routing) instead of a linear chain.
+
+### LangGraph Core Concepts
+
+## LLM Workflows
+
+Workflows are basically series of tasks to achieve a goal. A task which need LLM during execution to completed can be called LLM Workflow.
+
+(1) LLM workflows are a step by step process using which we can build complex LLM applications.
+
+(2) Each step in a workflow performs a distinct task — such as prompting, reasoning, tool calling, memory access, or decision-making.
+
+(3) Workflows can be linear, parallel, branched, or looped, allowing for complex behaviours like retries, multi-agent communication, or tool-augmented reasoning.
+
+(4) Common workflows
+
+(4.1) Prompt Chaining
+
+When you have a complex task, you convert it into subtasks. Here you build a chain and interact with multiple LLm, you share previous LLM output with next LLM.
+
+(4.2) Routing
+In routing workflow you understand task and decide who will execute the task.
+For example LLM recieve sales related query then LLM will decide to which LLM this query should be sent as there can be multiple deparments so query should be went to related LLM. The LLM responsible for sending query to related LLM to query is called router.
+
+(4.3) Parallelization
+In this you convert a task into multiple sub-tasks and execute them at once, then merge their results and look for final outcome.
+
+For example you are making a content moderation workflow for youtube, you check uploaded video with multiple angels,
+is video is appropriate ? does it have adult content ? is the video following community guidelines ? then we look at finan outcome of all LLMs and behalf of that we tak final decision. All LLMs will send their outcome to aggregator and then aggregator will make dicsion to flag the video or let it upload.
+
+(4.4) Orchestrator Workers
+
+This workflow is also similar to parallelization but the difference is here we dont know which LLM will handle which part of workflow.
+There is orchestrator which decides on the basis of the query which LLM will perform specific task and at the the end there is a synthesizer which will give output.
+
+(4.5) Evaluator Optimizer
+
+In this workflow we have a LLM call generator which for example create a blog on specific topic then LLM call Evaluator which have specific criteria given by us which checks if the blog meet with our expectations if yes then it accept it and if it reject then it also provide feedback then LLM call generator generate another blog. Basically this entire process work in form of iteration and it keep going until unless it dont generate expected result.
