@@ -464,3 +464,10 @@ Each returns an update (message) to the state
 No nodes are active, and
 
 No messages are in transit
+
+### Benifits of persistence
+
+(1) Short term meory
+(2) Fault tolerance
+(3) HITL
+(4) Time Travel
