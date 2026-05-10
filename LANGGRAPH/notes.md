@@ -467,7 +467,7 @@ No messages are in transit
 
 ### Benifits of persistence
 
-(1) Short term meory
-(2) Fault tolerance
-(3) HITL
-(4) Time Travel
+(1) Short term meory (save into the ram)
+(2) Fault tolerance (resume the process from where it was stopped during crash)
+(3) HITL (Human Approval)
+(4) Time Travel (Replay the steps for debugging purpose)
