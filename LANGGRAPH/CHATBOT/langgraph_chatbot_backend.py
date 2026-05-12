@@ -45,6 +45,7 @@ graph.add_edge(START, 'chat_node')
 graph.add_edge('chat_node', END)
 chatbot = graph.compile(checkpointer=checkpointer)
 
+
 # thread_id = '1'
 # while True:
 #     user_message = input('Type here: ')
