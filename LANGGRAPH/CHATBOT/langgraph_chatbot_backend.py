@@ -8,9 +8,8 @@ import os
 from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver
 import sqlite3
-from langchain_core.messages import HumanMessage
 
-
+os.environ["LANGCHAIN_PROJECT"] = "LangGraph Chatbot"
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
